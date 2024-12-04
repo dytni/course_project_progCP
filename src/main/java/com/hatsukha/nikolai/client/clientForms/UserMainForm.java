@@ -2,8 +2,6 @@ package com.hatsukha.nikolai.client.clientForms;
 
 import com.hatsukha.nikolai.client.ClientConnection;
 import com.hatsukha.nikolai.client.operationForms.GetOperationsByUserForm;
-import com.hatsukha.nikolai.client.operationForms.OperationStatsForm;
-import com.hatsukha.nikolai.client.productForms.ProductTablePanel;
 import com.hatsukha.nikolai.client.productForms.old.ViewProductsForm;
 import com.hatsukha.nikolai.client.utils.StyleUtils;
 

@@ -13,7 +13,6 @@ public class StyleUtils {
     public static final Color GRID_COLOR = new Color(135, 206, 250); // Голубые линии сетки
     public static final Color TITLE_COLOR = new Color(135, 206, 250); // Голубой цвет для заголовков
 
-    // Создание стандартного стилизованного JLabel
     public static JLabel createStyledLabel(String text) {
         JLabel label = new JLabel(text);
         label.setFont(new Font("Arial", Font.BOLD, 18));
@@ -21,7 +20,6 @@ public class StyleUtils {
         return label;
     }
 
-    // Создание стилизованного JButton
     public static JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 18));

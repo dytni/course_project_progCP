@@ -3,22 +3,17 @@ package com.hatsukha.nikolai.client.warehouseForms;
 import com.hatsukha.nikolai.client.ClientConnection;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import java.awt.*;
 
 public class WarehouseForm extends JFrame {
     private final ClientConnection clientConnection;
-    private final String mode; // "ADD" или "EDIT"
     private final WarehouseCrudForm parentForm;
-    private final String warehouseId;
 
     public WarehouseForm(ClientConnection clientConnection, String mode, WarehouseCrudForm parentForm,
                          String warehouseId, String name, String address) {
         this.clientConnection = clientConnection;
-        this.mode = mode;
+        // "ADD" или "EDIT"
         this.parentForm = parentForm;
-        this.warehouseId = warehouseId;
 
         setTitle(mode.equals("ADD") ? "Добавить склад" : "Редактировать склад");
         setSize(400, 300);

@@ -7,11 +7,9 @@ import java.awt.*;
 
 public class AddOperationForm extends JFrame {
     private final ClientConnection clientConnection;
-    private final OperationCrudForm parentForm;
 
     public AddOperationForm(ClientConnection clientConnection, OperationCrudForm parentForm) {
         this.clientConnection = clientConnection;
-        this.parentForm = parentForm;
 
         setTitle("Добавить операцию");
         setSize(500, 400);

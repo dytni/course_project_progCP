@@ -2,7 +2,6 @@ package com.hatsukha.nikolai.client.utils;
 
 import com.hatsukha.nikolai.client.ClientConnection;
 import com.hatsukha.nikolai.client.clientForms.AdminMainForm;
-import com.hatsukha.nikolai.client.utils.StyleUtils;
 
 import javax.swing.*;
 import java.awt.*;

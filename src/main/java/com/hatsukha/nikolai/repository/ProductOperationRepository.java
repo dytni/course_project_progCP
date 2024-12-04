@@ -2,7 +2,6 @@ package com.hatsukha.nikolai.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import com.hatsukha.nikolai.server.ServerLogger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

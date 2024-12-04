@@ -1,6 +1,5 @@
 package com.hatsukha.nikolai.client.operationForms;
 
-import com.hatsukha.nikolai.client.ClientConnection;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -8,7 +7,6 @@ import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStatsForm extends JFrame {
@@ -33,7 +31,7 @@ public class OperationStatsForm extends JFrame {
         chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
         // Кнопка "Назад"
-        JButton backButton = createStyledButton("Назад");
+        JButton backButton = createStyledButton();
         backButton.addActionListener(e -> dispose());
 
         JPanel buttonPanel = new JPanel();
@@ -64,8 +62,8 @@ public class OperationStatsForm extends JFrame {
         );
     }
 
-    private JButton createStyledButton(String text) {
-        JButton button = new JButton(text);
+    private JButton createStyledButton() {
+        JButton button = new JButton("Назад");
         button.setFont(new Font("Arial", Font.BOLD, 18));
         button.setForeground(Color.WHITE);
         button.setBackground(new Color(100, 149, 237));
@@ -86,10 +84,4 @@ public class OperationStatsForm extends JFrame {
         return button;
     }
 
-
-    public static void main(String[] args) {
-        // Пример вызова с подключением клиента
-        // ClientConnection clientConnection = new ClientConnection();
-        // new OperationPieChartForm(clientConnection);
-    }
 }

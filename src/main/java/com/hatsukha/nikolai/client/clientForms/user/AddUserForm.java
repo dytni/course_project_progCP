@@ -1,17 +1,14 @@
 package com.hatsukha.nikolai.client.clientForms.user;
 
 import com.hatsukha.nikolai.client.ClientConnection;
+import com.hatsukha.nikolai.client.utils.StyleUtils;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class AddUserForm extends JFrame {
-    private final ClientConnection clientConnection;
-    private final UserTablePanel userTablePanel;
 
     public AddUserForm(ClientConnection clientConnection, UserTablePanel userTablePanel) {
-        this.clientConnection = clientConnection;
-        this.userTablePanel = userTablePanel;
 
         setTitle("Добавить пользователя");
         setSize(500, 350);
@@ -102,27 +99,19 @@ public class AddUserForm extends JFrame {
     }
 
     private JTextField createStyledTextField() {
-        JTextField textField = new JTextField(15);
-        textField.setFont(new Font("Arial", Font.PLAIN, 16));
-        return textField;
+        return StyleUtils.createStyledTextField();
     }
 
     private JButton createStyledButton(String text) {
-        JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.BOLD, 18));
-        button.setForeground(Color.WHITE);
-        button.setBackground(new Color(255, 105, 180));
-        button.setFocusPainted(false);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        JButton button = StyleUtils.createStyledButton(text);
 
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(255, 182, 193));
+                button.setBackground(new Color(182, 216, 255));
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(255, 105, 180));
+                button.setBackground(new Color(105, 148, 255));
             }
         });
 

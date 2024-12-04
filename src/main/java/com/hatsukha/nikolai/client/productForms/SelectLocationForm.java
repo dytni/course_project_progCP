@@ -10,13 +10,11 @@ import java.util.List;
 public class SelectLocationForm extends JFrame {
     private final ClientConnection clientConnection;
     private final String productId;
-    private final String productName;
     private final ProductTablePanel productTablePanel;
 
     public SelectLocationForm(ClientConnection clientConnection, String productId, String productName, ProductTablePanel productTablePanel) {
         this.clientConnection = clientConnection;
         this.productId = productId;
-        this.productName = productName;
         this.productTablePanel = productTablePanel;
 
         setTitle("Установить локацию для продукта: " + productName);

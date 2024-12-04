@@ -93,13 +93,6 @@ public class DatabaseManager {
         return warehouseRepository.getAllWarehouses();
     }
 
-//    public String getWarehouseByLocation(String location) {
-//        return warehouseRepository.getWarehouseByLocation(location);
-//    }
-//
-//    public String getWarehouseByName(String name) {
-//        return warehouseRepository.getWarehouseByName(name);
-//    }
 
     // -------------------- Product Operations Repository --------------------
     public boolean addOperation(int productId, int warehouseId, int userId, String operationType, int quantity) {

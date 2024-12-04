@@ -7,16 +7,13 @@ import java.awt.*;
 
 public class ProductForm extends JFrame {
     private final ClientConnection clientConnection;
-    private final String mode; // "ADD" или "EDIT"
     private final ProductCrudForm parentForm;
-    private final String productId;
 
     public ProductForm(ClientConnection clientConnection, String mode, ProductCrudForm parentForm,
                        String productId, String name, String description, String category, String weight, String volume, String location) {
         this.clientConnection = clientConnection;
-        this.mode = mode;
+        // "ADD" или "EDIT"
         this.parentForm = parentForm;
-        this.productId = productId;
 
         setTitle(mode.equals("ADD") ? "Добавить продукт" : "Редактировать продукт");
         setSize(500, 500);

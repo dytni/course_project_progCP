@@ -35,7 +35,6 @@ public class RegisterForm {
         JButton registerButton = StyleUtils.createStyledButton("Зарегистрироваться");
         JButton backButton = StyleUtils.createStyledButton("Назад");
 
-        // Расположение элементов
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(usernameLabel, gbc);
@@ -56,10 +55,8 @@ public class RegisterForm {
         gbc.gridy = 3;
         panel.add(backButton, gbc);
 
-        // Обработка нажатия кнопки "Зарегистрироваться"
         registerButton.addActionListener(e -> handleRegister(frame, usernameField, passwordField));
 
-        // Обработка нажатия кнопки "Назад"
         backButton.addActionListener(e -> {
             frame.dispose();
             new LoginForm(clientConnection).show();

@@ -56,10 +56,8 @@ public class LoginForm {
         gbc.gridy = 3;
         panel.add(registerButton, gbc);
 
-        // Обработка нажатия кнопки "Войти"
         loginButton.addActionListener(e -> handleLogin(frame, usernameField, passwordField));
 
-        // Обработка нажатия кнопки "Регистрация"
         registerButton.addActionListener(e -> {
             frame.dispose();
             new RegisterForm(clientConnection).show();

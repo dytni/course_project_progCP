@@ -2,6 +2,7 @@ package com.hatsukha.nikolai.client.clientForms;
 
 import com.hatsukha.nikolai.client.ClientConnection;
 import com.hatsukha.nikolai.client.operationForms.GetOperationsByUserForm;
+import com.hatsukha.nikolai.client.operationForms.WarehouseOrdersChartForm;
 import com.hatsukha.nikolai.client.productForms.old.ViewProductsForm;
 import com.hatsukha.nikolai.client.utils.StyleUtils;
 
@@ -21,18 +22,27 @@ public class UserMainForm extends BaseMainForm {
         // Создание кнопок с использованием стилей
         JButton viewProductsButton = StyleUtils.createStyledButton("Просмотреть товары");
         JButton addOperationButton = StyleUtils.createStyledButton("Заказать товары");
+        JButton warehouseButton = StyleUtils.createStyledButton("Статистика по складам");
 
         // Расположение кнопок
         gbc.gridy = 2;
         panel.add(viewProductsButton, gbc);
         gbc.gridy = 3;
         panel.add(addOperationButton, gbc);
+        gbc.gridy = 4;
+        panel.add(warehouseButton, gbc);
 
 
         // Обработчики событий
         viewProductsButton.addActionListener(e -> {
             frame.dispose();
             new ViewProductsForm(clientConnection, "USER",userId).show();
+        });
+
+
+        warehouseButton.addActionListener(e -> {
+            frame.dispose();
+            new WarehouseOrdersChartForm(clientConnection, "USER", userId).setVisible(true);
         });
 
         addOperationButton.addActionListener(e -> {

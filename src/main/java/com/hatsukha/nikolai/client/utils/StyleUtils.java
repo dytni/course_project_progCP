@@ -10,8 +10,8 @@ public class StyleUtils {
     public static final Color HEADER_TEXT_COLOR = Color.BLACK; // Чёрный текст для шапки таблицы
     public static final Color SELECTION_BG_COLOR = new Color(173, 216, 230); // Светло-голубая подсветка строки
     public static final Color SELECTION_TEXT_COLOR = Color.BLACK; // Чёрный текст при выделении
-    public static final Color GRID_COLOR = new Color(135, 206, 250); // Голубые линии сетки
-    public static final Color TITLE_COLOR = new Color(135, 206, 250); // Голубой цвет для заголовков
+    public static final Color GRID_COLOR = new Color(135, 206, 250);
+    public static final Color TITLE_COLOR = new Color(135, 206, 250);
 
     public static JLabel createStyledLabel(String text) {
         JLabel label = new JLabel(text);

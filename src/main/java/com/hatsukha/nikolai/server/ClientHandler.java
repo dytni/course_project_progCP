@@ -114,6 +114,11 @@ public class ClientHandler implements Runnable {
                         warehouseService.deleteWarehouse(in, out);
                         break;
 
+                    case "GET_ORDERS_BY_WAREHOUSE":
+                        warehouseService.getOrdersByWarehouse(out);
+                        break;
+
+
                     // -------------------- Операции с продуктами --------------------
                     case "ADD_OPERATION":
                         productOperationService.addOperation(in, out);

@@ -85,6 +85,25 @@ public class ProductOperationRepository {
             return false;
         }
     }
+    public Map<String, Integer> getOrdersByWarehouse() {
+        String query = "SELECT w.location AS warehouse_name, COUNT(po.operation_id) AS total_orders " +
+                "FROM Warehouse w " +
+                "LEFT JOIN ProductOperations po ON w.warehouse_id = po.warehouse_id " +
+                "GROUP BY w.warehouse_id, w.location";
+        Map<String, Integer> warehouseOrders = new HashMap<>();
+        try (PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                String warehouseName = rs.getString("warehouse_name");
+                int totalOrders = rs.getInt("total_orders");
+                warehouseOrders.put(warehouseName, totalOrders);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return warehouseOrders;
+    }
+
 
     public List<String> getOperationsByUser(int userId) {
         String query = "SELECT * FROM ProductOperations WHERE user_id = ?";

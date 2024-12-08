@@ -4,6 +4,7 @@ import com.hatsukha.nikolai.client.ClientConnection;
 import com.hatsukha.nikolai.client.clientForms.user.ManageUsersForm;
 import com.hatsukha.nikolai.client.operationForms.OperationCrudForm;
 import com.hatsukha.nikolai.client.operationForms.OperationStatsForm;
+import com.hatsukha.nikolai.client.operationForms.WarehouseOrdersChartForm;
 import com.hatsukha.nikolai.client.productForms.ProductCrudForm;
 import com.hatsukha.nikolai.client.utils.ServerLogsForm;
 import com.hatsukha.nikolai.client.utils.StyleUtils;
@@ -31,6 +32,7 @@ public class AdminMainForm extends BaseMainForm {
         JButton manageUsersButton = StyleUtils.createStyledButton("Управление пользователями");
         JButton manageOperationsButton = StyleUtils.createStyledButton("Управление операциями");
         JButton viewStatsButton = StyleUtils.createStyledButton("Просмотреть статистику операций");
+        JButton warehouseButton = StyleUtils.createStyledButton("Статистика по складам");
         JButton viewLogsButton = StyleUtils.createStyledButton("Просмотр логов");
 
 
@@ -50,6 +52,9 @@ public class AdminMainForm extends BaseMainForm {
         panel.add(viewStatsButton, gbc);
 
         gbc.gridy = 7;
+        panel.add(warehouseButton, gbc);
+
+        gbc.gridy = 8;
         panel.add(viewLogsButton, gbc);
 
         viewLogsButton.addActionListener(e -> {
@@ -66,7 +71,7 @@ public class AdminMainForm extends BaseMainForm {
         // Обработчик для кнопки управления продуктами
         viewProductsButton.addActionListener(e -> {
             frame.dispose();
-            new ProductCrudForm(clientConnection, role, userId).show();
+            new ProductCrudForm(clientConnection, role, userId).setVisible(true);
         });
 
         // Обработчик для кнопки управления складами
@@ -74,15 +79,20 @@ public class AdminMainForm extends BaseMainForm {
             frame.dispose();
             new WarehouseCrudForm(clientConnection).setVisible(true);
         });
+        warehouseButton.addActionListener(e -> {
+            frame.dispose();
+            new WarehouseOrdersChartForm(clientConnection, "ADMIN", userId).setVisible(true);
+        });
+
 
         manageUsersButton.addActionListener(e -> {
             frame.dispose();
-            new ManageUsersForm(clientConnection, userId).show();
+            new ManageUsersForm(clientConnection, userId).setVisible(true);
         });
 
         manageOperationsButton.addActionListener(e -> {
             frame.dispose();
-            new OperationCrudForm(clientConnection, userId).show();
+            new OperationCrudForm(clientConnection, userId).setVisible(true);
         });
     }
     private Map<String, Integer> fetchOrdersAnalytics() {

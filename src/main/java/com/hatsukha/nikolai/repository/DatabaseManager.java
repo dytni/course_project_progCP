@@ -98,6 +98,9 @@ public class DatabaseManager {
     public boolean addOperation(int productId, int warehouseId, int userId, String operationType, int quantity) {
         return productOperationRepository.addOperation(productId, warehouseId,userId,operationType,quantity);
     }
+    public Map<String, Integer> getOrdersByWarehouse(){
+        return productOperationRepository.getOrdersByWarehouse();
+    }
 
     public List<String> getAllOperations() {
         return productOperationRepository.getAllOperations();

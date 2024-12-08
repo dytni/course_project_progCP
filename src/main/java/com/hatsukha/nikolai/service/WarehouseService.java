@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 public class WarehouseService {
     private final ServerLogger logger;
@@ -15,6 +16,27 @@ public class WarehouseService {
     public WarehouseService(ServerLogger logger, DatabaseManager databaseManager) {
         this.logger = logger;
         this.databaseManager = databaseManager;
+    }
+
+    public void getOrdersByWarehouse(PrintWriter out) {
+        try {
+            // Получение статистики из репозитория
+            Map<String, Integer> warehouseStats = databaseManager.getOrdersByWarehouse();
+
+            // Отправка количества записей
+            out.println(warehouseStats.size());
+
+            // Отправка данных по каждому складу
+            warehouseStats.forEach((warehouseName, totalOrders) ->
+                    out.println(warehouseName + "," + totalOrders)
+            );
+
+            logger.log("Статистика заказов по складам успешно отправлена клиенту.");
+        } catch (Exception e) {
+            out.println("FAILURE");
+            logger.log("Ошибка при обработке статистики заказов по складам: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public void getWarehouses(PrintWriter out) {

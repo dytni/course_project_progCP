@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<styles>
+    <color name="HEADER_BG_COLOR">#87CEFA</color>
+    <color name="HEADER_TEXT_COLOR">#000000</color>
+    <color name="SELECTION_BG_COLOR">#ADD8E6</color>
+    <color name="SELECTION_TEXT_COLOR">#000000</color>
+    <color name="GRID_COLOR">#87CEFA</color>
+    <color name="TITLE_COLOR">#ADD8E6</color>
+    <color name="BUTTON_BG_COLOR">#6495ED</color>
+    <color name="BUTTON_HOVER_COLOR">#87CEFA</color>
+    <color name="TEXT_FIELD_BG_COLOR">#FFFFFF</color>
+    <color name="TEXT_FIELD_TEXT_COLOR">#000000</color>
+    <color name="CURSOR_COLOR">#000000</color>
+</styles>
+-->
+
+<!--Тёмная тема
+<styles>
+    <color name="HEADER_BG_COLOR">#333333</color>
+    <color name="HEADER_TEXT_COLOR">#FFFFFF</color>
+    <color name="SELECTION_BG_COLOR">#555555</color>
+    <color name="SELECTION_TEXT_COLOR">#FFFFFF</color>
+    <color name="GRID_COLOR">#444444</color>
+    <color name="TITLE_COLOR">#666666</color>
+    <color name="BUTTON_BG_COLOR">#444444</color>
+    <color name="BUTTON_HOVER_COLOR">#555555</color>
+    <color name="TEXT_FIELD_BG_COLOR">#222222</color>
+    <color name="TEXT_FIELD_TEXT_COLOR">#FFFFFF</color>
+    <color name="CURSOR_COLOR">#FFFFFF</color>
+</styles>
+-->
+<!--Светлая пастель-->
+<styles>
+    <color name="HEADER_BG_COLOR">#FFDAB9</color>
+    <color name="HEADER_TEXT_COLOR">#000000</color>
+    <color name="SELECTION_BG_COLOR">#FFE4B5</color>
+    <color name="SELECTION_TEXT_COLOR">#000000</color>
+    <color name="GRID_COLOR">#FFCBA4</color>
+    <color name="TITLE_COLOR">#FFDAB9</color>
+    <color name="BUTTON_BG_COLOR">#FFB6C1</color>
+    <color name="BUTTON_HOVER_COLOR">#FFC1CC</color>
+    <color name="TEXT_FIELD_BG_COLOR">#FFF5EE</color>
+    <color name="TEXT_FIELD_TEXT_COLOR">#000000</color>
+    <color name="CURSOR_COLOR">#000000</color>
+</styles>
+
+<!--Яркий минимализм
+<styles>
+    <color name="HEADER_BG_COLOR">#FF4500</color>
+    <color name="HEADER_TEXT_COLOR">#FFFFFF</color>
+    <color name="SELECTION_BG_COLOR">#FFD700</color>
+    <color name="SELECTION_TEXT_COLOR">#000000</color>
+    <color name="GRID_COLOR">#FF6347</color>
+    <color name="TITLE_COLOR">#FFA500</color>
+    <color name="BUTTON_BG_COLOR">#008000</color>
+    <color name="BUTTON_HOVER_COLOR">#32CD32</color>
+    <color name="TEXT_FIELD_BG_COLOR">#FFFFFF</color>
+    <color name="TEXT_FIELD_TEXT_COLOR">#000000</color>
+    <color name="CURSOR_COLOR">#000000</color>
+</styles>
+
+-->

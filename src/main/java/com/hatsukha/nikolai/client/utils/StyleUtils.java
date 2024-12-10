@@ -1,21 +1,86 @@
 package com.hatsukha.nikolai.client.utils;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StyleUtils {
-    public static final Color HEADER_BG_COLOR = new Color(135, 206, 250); // Голубой цвет для шапки таблицы
-    public static final Color HEADER_TEXT_COLOR = Color.BLACK; // Чёрный текст для шапки таблицы
-    public static final Color SELECTION_BG_COLOR = new Color(173, 216, 230); // Светло-голубая подсветка строки
-    public static final Color SELECTION_TEXT_COLOR = Color.BLACK; // Чёрный текст при выделении
-    public static final Color GRID_COLOR = new Color(135, 206, 250); // Голубой цвет линий сетки
-    public static final Color TITLE_COLOR = new Color(173, 216, 230); // Цвет для заголовков
-    public static final Color BUTTON_BG_COLOR = new Color(100, 149, 237); // Основной голубой цвет кнопки
-    public static final Color BUTTON_HOVER_COLOR = new Color(135, 206, 250); // Светло-голубой при наведении
-    public static final Color TEXT_FIELD_BG_COLOR = Color.WHITE; // Белый фон текстового поля
-    public static final Color TEXT_FIELD_TEXT_COLOR = Color.BLACK; // Чёрный текст в текстовом поле
-    public static final Color CURSOR_COLOR = Color.BLACK; // Чёрный курсор
+    private static final Map<String, Color> COLORS = new HashMap<>();
+
+    static {
+        try {
+            loadStyles();
+        } catch (Exception e) {
+            System.err.println("Ошибка при загрузке стилей: " + e.getMessage());
+            // Используем значения по умолчанию
+            setDefaultColors();
+        }
+    }
+
+    private static void setDefaultColors() {
+        COLORS.put("HEADER_BG_COLOR", new Color(135, 206, 250));
+        COLORS.put("HEADER_TEXT_COLOR", Color.BLACK);
+        COLORS.put("SELECTION_BG_COLOR", new Color(173, 216, 230));
+        COLORS.put("SELECTION_TEXT_COLOR", Color.BLACK);
+        COLORS.put("GRID_COLOR", new Color(135, 206, 250));
+        COLORS.put("TITLE_COLOR", new Color(173, 216, 230));
+        COLORS.put("BUTTON_BG_COLOR", new Color(100, 149, 237));
+        COLORS.put("BUTTON_HOVER_COLOR", new Color(135, 206, 250));
+        COLORS.put("TEXT_FIELD_BG_COLOR", Color.WHITE);
+        COLORS.put("TEXT_FIELD_TEXT_COLOR", Color.BLACK);
+        COLORS.put("CURSOR_COLOR", Color.BLACK);
+    }
+
+    public static void loadStyles() {
+        try {
+            File file = new File("src/main/resources/settings.xml");
+            if (!file.exists()) {
+                throw new RuntimeException("Файл settings.xml не найден");
+            }
+
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(file);
+            doc.getDocumentElement().normalize();
+
+            NodeList colorNodes = doc.getElementsByTagName("color");
+            for (int i = 0; i < colorNodes.getLength(); i++) {
+                Element element = (Element) colorNodes.item(i);
+                String name = element.getAttribute("name");
+                String value = element.getTextContent();
+                COLORS.put(name, Color.decode(value));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Ошибка загрузки стилей из settings.xml: " + e.getMessage());
+        }
+    }
+
+    private static Color getColor(String name, Color defaultColor) {
+        return COLORS.getOrDefault(name, defaultColor);
+    }
+
+    // Инициализация констант через getColor
+    public static final Color HEADER_BG_COLOR = getColor("HEADER_BG_COLOR", new Color(135, 206, 250));
+    public static final Color HEADER_TEXT_COLOR = getColor("HEADER_TEXT_COLOR", Color.BLACK);
+    public static final Color SELECTION_BG_COLOR = getColor("SELECTION_BG_COLOR", new Color(173, 216, 230));
+    public static final Color SELECTION_TEXT_COLOR = getColor("SELECTION_TEXT_COLOR", Color.BLACK);
+    public static final Color GRID_COLOR = getColor("GRID_COLOR", new Color(135, 206, 250));
+    public static final Color TITLE_COLOR = getColor("TITLE_COLOR", new Color(173, 216, 230));
+    public static final Color BUTTON_BG_COLOR = getColor("BUTTON_BG_COLOR", new Color(100, 149, 237));
+    public static final Color BUTTON_HOVER_COLOR = getColor("BUTTON_HOVER_COLOR", new Color(135, 206, 250));
+    public static final Color TEXT_FIELD_BG_COLOR = getColor("TEXT_FIELD_BG_COLOR", Color.WHITE);
+    public static final Color TEXT_FIELD_TEXT_COLOR = getColor("TEXT_FIELD_TEXT_COLOR", Color.BLACK);
+    public static final Color CURSOR_COLOR = getColor("CURSOR_COLOR", Color.BLACK);
+
 
     public static JLabel createStyledLabel(String text) {
         JLabel label = new JLabel(text);

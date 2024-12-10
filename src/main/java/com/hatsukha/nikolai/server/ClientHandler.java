@@ -149,6 +149,10 @@ public class ClientHandler implements Runnable {
                         break;
 
                     // -------------------- Неизвестная команда --------------------
+                    case "PING":
+                        logger.log("Ответ на тест сервера");
+                        out.println("PONG");
+                        break;
                     default:
                         logger.log("Неизвестная команда от клиента: " + command);
                         out.println("UNKNOWN_COMMAND");

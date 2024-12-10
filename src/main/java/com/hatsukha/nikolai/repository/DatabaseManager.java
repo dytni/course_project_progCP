@@ -11,12 +11,20 @@ public class DatabaseManager {
     private final ProductOperationRepository productOperationRepository;
     private final DatabaseConnection databaseConnection;
 
-    private DatabaseManager() {
+    public DatabaseManager() {
         databaseConnection = DatabaseConnection.getInstance();
         userRepository = new UserRepository();
         productRepository = new ProductRepository();
         warehouseRepository = new WarehouseRepository();
         productOperationRepository = new ProductOperationRepository();
+    }
+    public DatabaseManager(UserRepository userRepository, ProductRepository productRepository,
+                           WarehouseRepository warehouseRepository, ProductOperationRepository productOperationRepository) {
+        databaseConnection = DatabaseConnection.getInstance();
+        this.userRepository = userRepository;
+        this.productRepository = productRepository;
+        this.warehouseRepository = warehouseRepository;
+        this.productOperationRepository = productOperationRepository;
     }
 
     public static synchronized DatabaseManager getInstance() {

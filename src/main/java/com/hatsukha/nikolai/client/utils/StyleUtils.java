@@ -68,7 +68,6 @@ public class StyleUtils {
         return COLORS.getOrDefault(name, defaultColor);
     }
 
-    // Инициализация констант через getColor
     public static final Color HEADER_BG_COLOR = getColor("HEADER_BG_COLOR", new Color(135, 206, 250));
     public static final Color HEADER_TEXT_COLOR = getColor("HEADER_TEXT_COLOR", Color.BLACK);
     public static final Color SELECTION_BG_COLOR = getColor("SELECTION_BG_COLOR", new Color(173, 216, 230));

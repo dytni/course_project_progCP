@@ -19,13 +19,11 @@ public class LoginForm {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
 
-        // Создание панели с элементами
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Элементы интерфейса
         JLabel usernameLabel = StyleUtils.createStyledLabel("Имя пользователя:");
         JTextField usernameField = StyleUtils.createStyledTextField();
 
@@ -35,7 +33,6 @@ public class LoginForm {
         JButton loginButton = StyleUtils.createStyledButton("Войти");
         JButton registerButton = StyleUtils.createStyledButton("Регистрация");
 
-        // Расположение элементов
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(usernameLabel, gbc);

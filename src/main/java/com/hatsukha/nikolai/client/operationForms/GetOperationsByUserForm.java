@@ -9,8 +9,6 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GetOperationsByUserForm extends JFrame {
     private final ClientConnection clientConnection;
@@ -48,9 +46,7 @@ public class GetOperationsByUserForm extends JFrame {
         buttonPanel.add(updateButton);
         buttonPanel.add(backButton);
 
-        orderButton.addActionListener(e -> {
-                makeOrder();
-        });
+        orderButton.addActionListener(e -> makeOrder());
         backButton.addActionListener(e -> {
             dispose();
             new UserMainForm(clientConnection, userId).show();
@@ -66,10 +62,9 @@ public class GetOperationsByUserForm extends JFrame {
             int operationId = Integer.parseInt(operationsTable.getValueAt(selectedRow, 0).toString());
             String productId = operationsTable.getValueAt(selectedRow, 1).toString();
             String warehouseId = operationsTable.getValueAt(selectedRow, 2).toString();
-            String operationType = operationsTable.getValueAt(selectedRow, 3).toString();
             String quantity = operationsTable.getValueAt(selectedRow, 4).toString();
 
-            new UpdateOperationForm(clientConnection, operationId, userId, this, productId, warehouseId, operationType, quantity);
+            new UpdateOperationForm(clientConnection, operationId, userId, this, productId, warehouseId, quantity);
         });
 
 
@@ -144,7 +139,6 @@ public class GetOperationsByUserForm extends JFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Ошибка загрузки операций. Неверный формат ответа сервера!",
                     "Ошибка", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }
 
@@ -183,7 +177,6 @@ public class GetOperationsByUserForm extends JFrame {
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(frame, "Ошибка загрузки продуктов!", "Ошибка", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
             return;
         }
 
@@ -198,7 +191,6 @@ public class GetOperationsByUserForm extends JFrame {
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(frame, "Ошибка загрузки складов!", "Ошибка", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
             return;
         }
 

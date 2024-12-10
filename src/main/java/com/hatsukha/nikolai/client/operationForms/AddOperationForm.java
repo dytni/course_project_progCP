@@ -105,7 +105,6 @@ public class AddOperationForm extends JFrame {
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Ошибка загрузки продуктов!", "Ошибка", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }
 
@@ -120,7 +119,6 @@ public class AddOperationForm extends JFrame {
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Ошибка загрузки складов!", "Ошибка", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }
 }

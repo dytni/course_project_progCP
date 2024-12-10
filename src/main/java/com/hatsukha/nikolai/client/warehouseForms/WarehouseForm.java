@@ -1,6 +1,7 @@
 package com.hatsukha.nikolai.client.warehouseForms;
 
 import com.hatsukha.nikolai.client.ClientConnection;
+import com.hatsukha.nikolai.client.utils.StyleUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +13,6 @@ public class WarehouseForm extends JFrame {
     public WarehouseForm(ClientConnection clientConnection, String mode, WarehouseCrudForm parentForm,
                          String warehouseId, String name, String address) {
         this.clientConnection = clientConnection;
-        // "ADD" или "EDIT"
         this.parentForm = parentForm;
 
         setTitle(mode.equals("ADD") ? "Добавить склад" : "Редактировать склад");
@@ -28,15 +28,15 @@ public class WarehouseForm extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Поля ввода
-        JLabel nameLabel = createStyledLabel("Название:");
-        JTextField nameField = createStyledTextField(name);
+        JLabel nameLabel = StyleUtils.createStyledLabel("Название:");
+        JTextField nameField = StyleUtils.createStyledTextField(name);
 
-        JLabel addressLabel = createStyledLabel("Адрес:");
-        JTextField addressField = createStyledTextField(address);
+        JLabel addressLabel = StyleUtils.createStyledLabel("Адрес:");
+        JTextField addressField = StyleUtils.createStyledTextField(address);
 
         // Кнопки
-        JButton saveButton = createStyledButton(mode.equals("ADD") ? "Добавить" : "Сохранить");
-        JButton cancelButton = createStyledButton("Отмена");
+        JButton saveButton = StyleUtils.createStyledButton(mode.equals("ADD") ? "Добавить" : "Сохранить");
+        JButton cancelButton = StyleUtils.createStyledButton("Отмена");
 
         // Расположение элементов
         gbc.gridx = 0;
@@ -100,11 +100,14 @@ public class WarehouseForm extends JFrame {
     }
 
     private void editWarehouse(String id, String name, String address) {
-        clientConnection.send("EDIT_WAREHOUSE");
+        if (!isUniqueLocally(id, name, address)) {
+            JOptionPane.showMessageDialog(this, "Склад с таким названием или адресом уже существует!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        clientConnection.send("UPDATE_WAREHOUSE");
         clientConnection.send(id);
         clientConnection.send(name);
         clientConnection.send(address);
-
         String response = clientConnection.receive();
         if ("SUCCESS".equals(response)) {
             JOptionPane.showMessageDialog(this, "Склад успешно обновлен!", "Успех", JOptionPane.INFORMATION_MESSAGE);
@@ -115,45 +118,17 @@ public class WarehouseForm extends JFrame {
         }
     }
 
-    // Создание стилизованной метки
-    private JLabel createStyledLabel(String text) {
-        JLabel label = new JLabel(text);
-        label.setFont(new Font("Arial", Font.BOLD, 16));
-        label.setForeground(new Color(135, 206, 250)); // Голубой цвет текста
-        return label;
-    }
+    private boolean isUniqueLocally(String id, String name, String address) {
+        JTable warehouseTable = parentForm.getWarehouseTable();
+        for (int i = 0; i < warehouseTable.getRowCount(); i++) {
+            String existingId = warehouseTable.getValueAt(i, 0).toString();
+            String existingName = warehouseTable.getValueAt(i, 1).toString();
+            String existingAddress = warehouseTable.getValueAt(i, 2).toString();
 
-    // Создание стилизованного текстового поля
-    private JTextField createStyledTextField(String text) {
-        JTextField textField = new JTextField(text, 15);
-        textField.setFont(new Font("Arial", Font.PLAIN, 16));
-        textField.setBackground(Color.WHITE); // Белый фон
-        textField.setForeground(Color.BLACK); // Чёрный текст
-        textField.setCaretColor(Color.BLACK); // Чёрный курсор
-        textField.setBorder(BorderFactory.createLineBorder(new Color(135, 206, 250), 2)); // Голубая рамка
-        return textField;
-    }
-
-    // Создание стилизованной кнопки
-    private JButton createStyledButton(String text) {
-        JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.BOLD, 18));
-        button.setForeground(Color.BLACK);
-        button.setBackground(new Color(135, 206, 250)); // Голубой фон
-        button.setFocusPainted(false);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-
-        button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(173, 216, 230)); // Светло-голубой при наведении
+            if (!existingId.equals(id) && (existingName.equalsIgnoreCase(name) || existingAddress.equalsIgnoreCase(address))) {
+                return false;
             }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(135, 206, 250)); // Голубой фон
-            }
-        });
-
-        return button;
+        }
+        return true;
     }
 }

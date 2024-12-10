@@ -1,25 +1,15 @@
 package com.hatsukha.nikolai.client.operationForms;
 
 import com.hatsukha.nikolai.client.ClientConnection;
+import com.hatsukha.nikolai.client.utils.StyleUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class UpdateOperationForm extends JFrame {
-    private final ClientConnection clientConnection;
-    private final int operationId;
-    private final GetOperationsByUserForm parentForm;
-    private final OperationCrudForm parentCrudForm;
-    private final int userId;
 
     public UpdateOperationForm(ClientConnection clientConnection, int operationId, int userId, GetOperationsByUserForm parentForm,
-                               String productId, String warehouseId, String operationType, String quantity) {
-        this.clientConnection = clientConnection;
-        this.operationId = operationId;
-        this.parentForm = parentForm;
-        this.userId = userId;
+                               String productId, String warehouseId, String quantity) {
 
         setTitle("Редактировать операцию");
         setSize(500, 400);
@@ -37,13 +27,12 @@ public class UpdateOperationForm extends JFrame {
 
         JLabel operationTypeLabel = new JLabel("Тип операции:");
         JComboBox<String> operationTypeComboBox = new JComboBox<>(new String[]{"приём", "перемещение", "списание"});
-     //   operationTypeComboBox.setSelectedItem(operationType);
 
         JLabel quantityLabel = new JLabel("Количество:");
         JTextField quantityField = new JTextField(quantity);
 
-        JButton updateButton = createStyledButton("Обновить");
-        JButton cancelButton = createStyledButton("Отмена");
+        JButton updateButton =  StyleUtils.createStyledButton("Обновить");
+        JButton cancelButton =  StyleUtils.createStyledButton("Отмена");
 
         updateButton.addActionListener(e -> {
             try {
@@ -88,15 +77,10 @@ public class UpdateOperationForm extends JFrame {
 
         add(panel);
         setVisible(true);
-        parentCrudForm = null;
     }
     public UpdateOperationForm(ClientConnection clientConnection, int operationId, int userId,
                                OperationCrudForm parentForm, String productId,
                                String warehouseId, String operationType, String quantity) {
-        this.clientConnection = clientConnection;
-        this.operationId = operationId;
-        this.parentCrudForm = parentForm;
-        this.userId = userId;
 
         setTitle("Редактировать операцию");
         setSize(500, 400);
@@ -119,8 +103,8 @@ public class UpdateOperationForm extends JFrame {
         JLabel quantityLabel = new JLabel("Количество:");
         JTextField quantityField = new JTextField(quantity);
 
-        JButton updateButton = createStyledButton("Обновить");
-        JButton cancelButton = createStyledButton("Отмена");
+        JButton updateButton =  StyleUtils.createStyledButton("Обновить");
+        JButton cancelButton =  StyleUtils.createStyledButton("Отмена");
 
         updateButton.addActionListener(e -> {
             try {
@@ -165,28 +149,6 @@ public class UpdateOperationForm extends JFrame {
 
         add(panel);
         setVisible(true);
-        this.parentForm = null;
     }
 
-    private JButton createStyledButton(String text) {
-        JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.BOLD, 16));
-        button.setForeground(Color.BLACK);
-        button.setBackground(new Color(173, 216, 230));
-        button.setFocusPainted(false);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-
-        button.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent evt) {
-                button.setBackground(new Color(135, 206, 235));
-            }
-
-            public void mouseExited(MouseEvent evt) {
-                button.setBackground(new Color(173, 216, 230));
-            }
-        });
-
-        return button;
-    }
 }

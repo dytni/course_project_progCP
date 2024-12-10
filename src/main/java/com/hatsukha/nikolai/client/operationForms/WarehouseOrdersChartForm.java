@@ -33,11 +33,7 @@ public class WarehouseOrdersChartForm extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
-
-        // Получение данных для графика
         DefaultCategoryDataset dataset = fetchWarehouseOrdersData();
-
-        // Создание графика
         JFreeChart barChart = ChartFactory.createBarChart(
                 "Заказы по складам",
                 "Склады",
@@ -49,7 +45,6 @@ public class WarehouseOrdersChartForm extends JFrame {
         chartPanel.setPreferredSize(new Dimension(800, 500));
         chartPanel.setBorder(StyleUtils.createStyledLineBorder());
 
-        // Кнопка возврата
         JButton backButton = StyleUtils.createStyledButton("Назад");
         backButton.addActionListener(e ->{
             dispose();
@@ -84,8 +79,6 @@ public class WarehouseOrdersChartForm extends JFrame {
                 String[] row = clientConnection.receive().split(",");
                 data.add(row);
             }
-
-            // Заполнение данных для графика
             for (String[] row : data) {
                 String warehouseName = row[0];
                 int totalOrders = Integer.parseInt(row[1]);
@@ -93,7 +86,6 @@ public class WarehouseOrdersChartForm extends JFrame {
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Ошибка загрузки данных!", "Ошибка", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
 
         return dataset;

@@ -1,5 +1,6 @@
 package com.hatsukha.nikolai.client.operationForms;
 
+import com.hatsukha.nikolai.client.utils.StyleUtils;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -25,13 +26,11 @@ public class OperationStatsForm extends JFrame {
 
         JPanel mainPanel = new JPanel(new BorderLayout());
 
-        // Создание диаграммы
         JFreeChart pieChart = createPieChart(data);
         ChartPanel chartPanel = new ChartPanel(pieChart);
         chartPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        // Кнопка "Назад"
-        JButton backButton = createStyledButton();
+        JButton backButton = StyleUtils.createStyledButton("Назад");
         backButton.addActionListener(e -> dispose());
 
         JPanel buttonPanel = new JPanel();
@@ -46,7 +45,6 @@ public class OperationStatsForm extends JFrame {
     }
 
     private JFreeChart createPieChart(Map<String, Integer> operationData) {
-        // Создаем набор данных для круговой диаграммы
         DefaultPieDataset dataset = new DefaultPieDataset();
         for (Map.Entry<String, Integer> entry : operationData.entrySet()) {
             dataset.setValue(entry.getKey(), entry.getValue());
@@ -60,28 +58,6 @@ public class OperationStatsForm extends JFrame {
                 true,                             // Подсказки
                 false                             // URL
         );
-    }
-
-    private JButton createStyledButton() {
-        JButton button = new JButton("Назад");
-        button.setFont(new Font("Arial", Font.BOLD, 18));
-        button.setForeground(Color.WHITE);
-        button.setBackground(new Color(100, 149, 237));
-        button.setFocusPainted(false);
-        button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-        button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(135, 206, 250));
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(100, 149, 237));
-            }
-        });
-
-        return button;
     }
 
 }

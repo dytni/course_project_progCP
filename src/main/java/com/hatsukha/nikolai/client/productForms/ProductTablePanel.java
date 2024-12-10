@@ -1,6 +1,7 @@
 package com.hatsukha.nikolai.client.productForms;
 
 import com.hatsukha.nikolai.client.ClientConnection;
+import com.hatsukha.nikolai.client.utils.StyleUtils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +18,7 @@ public class ProductTablePanel extends JPanel {
 
     public ProductTablePanel(ClientConnection clientConnection) {
         this.clientConnection = clientConnection;
-        this.productTable = createStyledTable();
+        this.productTable = StyleUtils.createStyledTable();
         this.categoryFilter = new JComboBox<>(new String[]{"Все категории"});
         this.searchField = new JTextField(20);
 
@@ -90,17 +91,13 @@ public class ProductTablePanel extends JPanel {
                     rowData.toArray(new Object[0][]), columnNames
             );
             productTable.setModel(model);
-
             TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
             productTable.setRowSorter(sorter);
-
-            // Обновляем категории в фильтре
             categoryFilter.setModel(new DefaultComboBoxModel<>(categories.toArray(new String[0])));
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Ошибка загрузки продуктов. Неверный формат ответа сервера!",
                     "Ошибка", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }
 
@@ -127,23 +124,4 @@ public class ProductTablePanel extends JPanel {
         productTable.setRowSorter(sorter);
     }
 
-    private JTable createStyledTable() {
-        JTable table = new JTable();
-        table.setFont(new Font("Arial", Font.PLAIN, 16));
-        table.setRowHeight(30);
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
-        table.getTableHeader().setBackground(new Color(173, 216, 230)); // Голубая шапка
-        table.getTableHeader().setForeground(Color.BLACK); // Чёрный текст заголовка
-        table.setSelectionBackground(new Color(135, 206, 235)); // Голубая подсветка строки
-        table.setSelectionForeground(Color.BLACK); // Чёрный текст при выделении
-        table.setGridColor(new Color(173, 216, 230)); // Голубые линии сетки
-        table.setBackground(Color.WHITE); // Белый фон таблицы
-        table.setForeground(Color.BLACK); // Чёрный текст ячеек
-        table.setShowGrid(true);
-
-        // Включение сортировки
-        table.setAutoCreateRowSorter(true);
-
-        return table;
-    }
 }

@@ -6,17 +6,13 @@ import com.hatsukha.nikolai.client.clientForms.UserMainForm;
 import com.hatsukha.nikolai.client.utils.StyleUtils;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class ProductCrudForm extends JFrame {
     private final ClientConnection clientConnection;
     private final ProductTablePanel productTablePanel;
     private final String role;
     private final int userId;
-    private TableRowSorter<DefaultTableModel> tableRowSorter;
 
     public ProductCrudForm(ClientConnection clientConnection, String role, int userId) {
         this.userId = userId;
@@ -92,7 +88,7 @@ public class ProductCrudForm extends JFrame {
     }
 
     private void showAddProductForm() {
-        new ProductForm(clientConnection, "ADD", this, null, null, null, null, null, null, "Не указанно").show();
+        new ProductForm(clientConnection, "ADD", this, null, null, null, null, null, null, "Не указанно").setVisible(true);
     }
 
     private void showEditProductForm() {
@@ -111,7 +107,7 @@ public class ProductCrudForm extends JFrame {
         String volume = productTable.getValueAt(selectedRow, 5).toString();
         String location = productTable.getValueAt(selectedRow, 6).toString();
 
-        new ProductForm(clientConnection, "EDIT", this, productId, name, description, category, weight, volume, location).show();
+        new ProductForm(clientConnection, "EDIT", this, productId, name, description, category, weight, volume, location).setVisible(true);
     }
 
     private void deleteProduct() {

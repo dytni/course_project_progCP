@@ -20,19 +20,19 @@ public class AddUserForm extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        JLabel usernameLabel = createStyledLabel("Имя пользователя:");
-        JTextField usernameField = createStyledTextField();
+        JLabel usernameLabel =  StyleUtils.createStyledLabel("Имя пользователя:");
+        JTextField usernameField =  StyleUtils.createStyledTextField();
 
-        JLabel passwordLabel = createStyledLabel("Пароль:");
+        JLabel passwordLabel =  StyleUtils.createStyledLabel("Пароль:");
         JPasswordField passwordField = new JPasswordField(15);
         passwordField.setFont(new Font("Arial", Font.PLAIN, 16));
 
-        JLabel roleLabel = createStyledLabel("Роль:");
+        JLabel roleLabel =  StyleUtils.createStyledLabel("Роль:");
         JComboBox<String> roleComboBox = new JComboBox<>(new String[]{"USER", "ADMIN"});
         roleComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
 
-        JButton addButton = createStyledButton("Добавить");
-        JButton cancelButton = createStyledButton("Отмена");
+        JButton addButton =   StyleUtils.createStyledButton("Добавить");
+        JButton cancelButton =  StyleUtils.createStyledButton("Отмена");
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -91,30 +91,4 @@ public class AddUserForm extends JFrame {
         setVisible(true);
     }
 
-    private JLabel createStyledLabel(String text) {
-        JLabel label = new JLabel(text);
-        label.setFont(new Font("Arial", Font.BOLD, 16));
-        label.setForeground(new Color(60, 60, 60));
-        return label;
-    }
-
-    private JTextField createStyledTextField() {
-        return StyleUtils.createStyledTextField();
-    }
-
-    private JButton createStyledButton(String text) {
-        JButton button = StyleUtils.createStyledButton(text);
-
-        button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(182, 216, 255));
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(105, 148, 255));
-            }
-        });
-
-        return button;
-    }
 }

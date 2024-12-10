@@ -26,7 +26,6 @@ public class AdminMainForm extends BaseMainForm {
 
     @Override
     protected void addCustomComponents(JPanel panel, GridBagConstraints gbc, JFrame frame) {
-        // Создание кнопок
         JButton viewProductsButton = StyleUtils.createStyledButton("Управление продуктами");
         JButton viewWarehousesButton = StyleUtils.createStyledButton("Управление складами");
         JButton manageUsersButton = StyleUtils.createStyledButton("Управление пользователями");
@@ -36,7 +35,6 @@ public class AdminMainForm extends BaseMainForm {
         JButton viewLogsButton = StyleUtils.createStyledButton("Просмотр логов");
 
 
-        // Размещение кнопок
         gbc.gridy = 2;
         panel.add(viewProductsButton, gbc);
 
@@ -108,7 +106,6 @@ public class AdminMainForm extends BaseMainForm {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ошибка загрузки аналитики заказов!", "Ошибка", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
         return ordersData;
     }

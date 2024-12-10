@@ -1,6 +1,7 @@
 package com.hatsukha.nikolai.client.productForms;
 
 import com.hatsukha.nikolai.client.ClientConnection;
+import com.hatsukha.nikolai.client.utils.StyleUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,24 +29,24 @@ public class ProductForm extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Поля ввода
-        JLabel nameLabel = createStyledLabel("Название:");
-        JTextField nameField = createStyledTextField(name);
+        JLabel nameLabel = StyleUtils.createStyledLabel("Название:");
+        JTextField nameField = StyleUtils.createStyledTextField(name);
 
-        JLabel descriptionLabel = createStyledLabel("Описание:");
-        JTextField descriptionField = createStyledTextField(description);
+        JLabel descriptionLabel = StyleUtils.createStyledLabel("Описание:");
+        JTextField descriptionField = StyleUtils.createStyledTextField(description);
 
-        JLabel categoryLabel = createStyledLabel("Категория:");
-        JTextField categoryField = createStyledTextField(category);
+        JLabel categoryLabel = StyleUtils.createStyledLabel("Категория:");
+        JTextField categoryField = StyleUtils.createStyledTextField(category);
 
-        JLabel weightLabel = createStyledLabel("Вес:");
-        JTextField weightField = createStyledTextField(weight);
+        JLabel weightLabel = StyleUtils.createStyledLabel("Вес:");
+        JTextField weightField = StyleUtils.createStyledTextField(weight);
 
-        JLabel volumeLabel = createStyledLabel("Объём:");
-        JTextField volumeField = createStyledTextField(volume);
+        JLabel volumeLabel = StyleUtils.createStyledLabel("Объём:");
+        JTextField volumeField = StyleUtils.createStyledTextField(volume);
 
         // Кнопки
-        JButton saveButton = createStyledButton(mode.equals("ADD") ? "Добавить" : "Сохранить");
-        JButton cancelButton = createStyledButton("Отмена");
+        JButton saveButton = StyleUtils.createStyledButton(mode.equals("ADD") ? "Добавить" : "Сохранить");
+        JButton cancelButton = StyleUtils.createStyledButton("Отмена");
 
         // Расположение элементов
         gbc.gridx = 0;
@@ -114,10 +115,7 @@ public class ProductForm extends JFrame {
                 editProduct(productId, productName, productDescription, productCategory, productWeight, productVolume, location);
             }
         });
-
         cancelButton.addActionListener(e -> dispose());
-
-        // Добавление панели и отображение
         add(panel);
         setVisible(true);
     }
@@ -158,47 +156,5 @@ public class ProductForm extends JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Ошибка при обновлении продукта!", "Ошибка", JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    // Создание стилизованной метки
-    private JLabel createStyledLabel(String text) {
-        JLabel label = new JLabel(text);
-        label.setFont(new Font("Arial", Font.BOLD, 16));
-        label.setForeground(new Color(135, 206, 250)); // Голубой цвет текста
-        return label;
-    }
-
-    // Создание стилизованного текстового поля
-    private JTextField createStyledTextField(String text) {
-        JTextField textField = new JTextField(text, 15);
-        textField.setFont(new Font("Arial", Font.PLAIN, 16));
-        textField.setBackground(Color.WHITE); // Белый фон
-        textField.setForeground(Color.BLACK); // Чёрный текст
-        textField.setCaretColor(Color.BLACK); // Чёрный курсор
-        textField.setBorder(BorderFactory.createLineBorder(new Color(135, 206, 250), 2)); // Голубая рамка
-        return textField;
-    }
-
-    // Создание стилизованной кнопки
-    private JButton createStyledButton(String text) {
-        JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.BOLD, 18));
-        button.setForeground(Color.BLACK);
-        button.setBackground(new Color(135, 206, 250)); // Голубой фон
-        button.setFocusPainted(false);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-
-        button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(173, 216, 230)); // Светло-голубой при наведении
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(135, 206, 250)); // Голубой фон
-            }
-        });
-
-        return button;
     }
 }

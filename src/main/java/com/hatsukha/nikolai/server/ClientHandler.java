@@ -32,12 +32,13 @@ public class ClientHandler implements Runnable {
             String command;
             while ((command = in.readLine()) != null) {
                 logger.log("Получена команда от клиента: " + command);
-
+                String username;
+                String password;
                 switch (command.toUpperCase()) {
                     // -------------------- Пользователи --------------------
                     case "REGISTER":
-                        String username = in.readLine();
-                        String password = in.readLine();
+                        username = in.readLine();
+                        password = in.readLine();
                         boolean registered = loginService.registerUser(username, password, "USER");
                         out.println(registered ? "SUCCESS" : "FAILURE");
                         break;

@@ -35,7 +35,6 @@ public class WarehouseService {
         } catch (Exception e) {
             out.println("FAILURE");
             logger.log("Ошибка при обработке статистики заказов по складам: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 

@@ -2,6 +2,7 @@ package com.hatsukha.nikolai.client.operationForms;
 
 import com.hatsukha.nikolai.client.ClientConnection;
 import com.hatsukha.nikolai.client.clientForms.AdminMainForm;
+import com.hatsukha.nikolai.client.utils.StyleUtils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -25,7 +26,7 @@ public class OperationCrudForm extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
-        operationsTable = createStyledTable();
+        operationsTable =  StyleUtils.createStyledTable();
         JScrollPane scrollPane = new JScrollPane(operationsTable);
         scrollPane.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(new Color(173, 216, 230), 2),
@@ -47,31 +48,15 @@ public class OperationCrudForm extends JFrame {
         setVisible(true);
     }
 
-    private JTable createStyledTable() {
-        JTable table = new JTable();
-        table.setFont(new Font("Arial", Font.PLAIN, 16));
-        table.setRowHeight(30);
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
-        table.getTableHeader().setBackground(new Color(173, 216, 230));
-        table.getTableHeader().setForeground(Color.BLACK);
-        table.setSelectionBackground(new Color(135, 206, 235));
-        table.setSelectionForeground(Color.BLACK);
-        table.setGridColor(new Color(173, 216, 230));
-        table.setBackground(Color.WHITE);
-        table.setForeground(Color.BLACK);
-        table.setShowGrid(true);
-        table.setAutoCreateRowSorter(true);
-        return table;
-    }
 
     private JPanel createButtonPanel() {
         JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 10, 10));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        JButton addButton = createStyledButton("Добавить операцию");
-        JButton updateButton = createStyledButton("Редактировать операцию");
-        JButton deleteButton = createStyledButton("Удалить операцию");
-        JButton backButton = createStyledButton("Назад");
+        JButton addButton =  StyleUtils.createStyledButton("Добавить операцию");
+        JButton updateButton =  StyleUtils.createStyledButton("Редактировать операцию");
+        JButton deleteButton =  StyleUtils.createStyledButton("Удалить операцию");
+        JButton backButton =  StyleUtils.createStyledButton("Назад");
 
         addButton.addActionListener(e -> openAddOperationForm());
         updateButton.addActionListener(e -> openUpdateOperationForm());
@@ -88,28 +73,6 @@ public class OperationCrudForm extends JFrame {
         buttonPanel.add(backButton);
 
         return buttonPanel;
-    }
-
-    private JButton createStyledButton(String text) {
-        JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.BOLD, 16));
-        button.setForeground(Color.BLACK);
-        button.setBackground(new Color(173, 216, 230));
-        button.setFocusPainted(false);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-
-        button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(135, 206, 235));
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(173, 216, 230));
-            }
-        });
-
-        return button;
     }
 
     public void loadOperations() {
@@ -132,7 +95,6 @@ public class OperationCrudForm extends JFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Ошибка загрузки операций. Неверный формат ответа сервера!",
                     "Ошибка", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }
 

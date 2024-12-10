@@ -1,6 +1,7 @@
 package com.hatsukha.nikolai.client.productForms;
 
 import com.hatsukha.nikolai.client.ClientConnection;
+import com.hatsukha.nikolai.client.utils.StyleUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,8 +33,7 @@ public class SelectLocationForm extends JFrame {
         JLabel warehouseLabel = new JLabel("Выберите склад:");
         warehouseLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
-        JButton saveButton = new JButton("Сохранить");
-        saveButton.setFont(new Font("Arial", Font.BOLD, 16));
+        JButton saveButton = StyleUtils.createStyledButton("Сохранить");
         saveButton.addActionListener(e -> {
             String selectedWarehouse = (String) warehouseComboBox.getSelectedItem();
             if (selectedWarehouse != null) {
@@ -43,8 +43,7 @@ public class SelectLocationForm extends JFrame {
             }
         });
 
-        JButton cancelButton = new JButton("Отмена");
-        cancelButton.setFont(new Font("Arial", Font.BOLD, 16));
+        JButton cancelButton = StyleUtils.createStyledButton("Отмена");
         cancelButton.addActionListener(e -> dispose());
 
         JPanel formPanel = new JPanel(new GridLayout(2, 1, 10, 10));

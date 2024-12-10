@@ -3,6 +3,7 @@ package com.hatsukha.nikolai.client.productForms.old;
 import com.hatsukha.nikolai.client.ClientConnection;
 import com.hatsukha.nikolai.client.clientForms.AdminMainForm;
 import com.hatsukha.nikolai.client.clientForms.UserMainForm;
+import com.hatsukha.nikolai.client.utils.StyleUtils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -29,7 +30,7 @@ public class ViewProductsForm extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        productTable = createStyledTable();
+        productTable = StyleUtils.createStyledTable();
         searchField = new JTextField(15);
         categoryFilter = new JComboBox<>(new String[]{"Все категории"});
 
@@ -57,7 +58,7 @@ public class ViewProductsForm extends JFrame {
         controlsPanel.add(new JLabel("Категория:"));
         controlsPanel.add(categoryFilter);
 
-        JButton backButton = createStyledButton("Назад");
+        JButton backButton = StyleUtils.createStyledButton("Назад");
         backButton.addActionListener(e -> {
             dispose();
             if ("ADMIN".equalsIgnoreCase(role)) {
@@ -121,7 +122,6 @@ public class ViewProductsForm extends JFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Ошибка загрузки продуктов. Неверный формат ответа сервера!",
                     "Ошибка", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }
 
@@ -146,46 +146,5 @@ public class ViewProductsForm extends JFrame {
         });
 
         productTable.setRowSorter(sorter);
-    }
-
-    private JTable createStyledTable() {
-        JTable table = new JTable();
-        table.setFont(new Font("Arial", Font.PLAIN, 16));
-        table.setRowHeight(30);
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
-        table.getTableHeader().setBackground(new Color(173, 216, 230));
-        table.getTableHeader().setForeground(Color.BLACK);
-        table.setSelectionBackground(new Color(135, 206, 235));
-        table.setSelectionForeground(Color.BLACK);
-        table.setGridColor(new Color(173, 216, 230));
-        table.setBackground(Color.WHITE);
-        table.setForeground(Color.BLACK);
-        table.setShowGrid(true);
-        table.setAutoCreateRowSorter(true);
-        return table;
-    }
-
-    private JButton createStyledButton(String text) {
-        JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.BOLD, 18));
-        button.setForeground(Color.BLACK);
-        button.setBackground(new Color(173, 216, 230));
-        button.setFocusPainted(false);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-
-        button.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(135, 206, 235));
-            }
-
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(173, 216, 230));
-            }
-        });
-
-        return button;
     }
 }

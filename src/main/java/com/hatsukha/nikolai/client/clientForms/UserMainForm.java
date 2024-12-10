@@ -36,7 +36,7 @@ public class UserMainForm extends BaseMainForm {
         // Обработчики событий
         viewProductsButton.addActionListener(e -> {
             frame.dispose();
-            new ViewProductsForm(clientConnection, "USER",userId).show();
+            new ViewProductsForm(clientConnection, "USER",userId).setVisible(true);
         });
 
 
@@ -47,7 +47,7 @@ public class UserMainForm extends BaseMainForm {
 
         addOperationButton.addActionListener(e -> {
             frame.dispose();
-            new GetOperationsByUserForm(clientConnection, userId).show();
+            new GetOperationsByUserForm(clientConnection, userId).setVisible(true);
         });
     }
 

@@ -1,6 +1,5 @@
 import com.hatsukha.nikolai.repository.*;
 import org.junit.jupiter.api.*;
-import org.mockito.Mockito;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,14 +12,13 @@ class DatabaseManagerTest {
     private DatabaseManager databaseManager;
     private UserRepository userRepository;
     private ProductRepository productRepository;
-    private WarehouseRepository warehouseRepository;
     private ProductOperationRepository productOperationRepository;
 
     @BeforeEach
     void setUp() {
         userRepository = mock(UserRepository.class);
         productRepository = mock(ProductRepository.class);
-        warehouseRepository = mock(WarehouseRepository.class);
+        WarehouseRepository warehouseRepository = mock(WarehouseRepository.class);
         productOperationRepository = mock(ProductOperationRepository.class);
 
         databaseManager = new DatabaseManager(userRepository, productRepository, warehouseRepository, productOperationRepository);
@@ -63,7 +61,7 @@ class DatabaseManagerTest {
 
         List<String> products = databaseManager.getAllProducts();
         assertEquals(2, products.size());
-        assertEquals("1,Phone,Smartphone,Electronics,0.5,0.1", products.get(0));
+        assertEquals("1,Phone,Smartphone,Electronics,0.5,0.1", products.getFirst());
 
         verify(productRepository, times(1)).getAllProducts();
     }
@@ -108,7 +106,7 @@ class DatabaseManagerTest {
 
         List<String> operations = databaseManager.getAllOperationsByUser(1);
         assertEquals(2, operations.size());
-        assertEquals("1,1,2,приём,50", operations.get(0));
+        assertEquals("1,1,2,приём,50", operations.getFirst());
 
         verify(productOperationRepository, times(1)).getOperationsByUser(1);
     }

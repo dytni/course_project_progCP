@@ -112,13 +112,16 @@ public class WarehouseCrudForm extends JFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Ошибка загрузки складов. Неверный формат ответа сервера!",
                     "Ошибка", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }
 
     private void showAddWarehouseForm() {
-        new WarehouseForm(clientConnection, "ADD", this, null, null, null).show();
+        new WarehouseForm(clientConnection, "ADD", this, null, null, null).setVisible(true);
     }
+    public JTable getWarehouseTable() {
+        return warehouseTable;
+    }
+
 
     private void showEditWarehouseForm() {
         int selectedRow = warehouseTable.getSelectedRow();
@@ -131,7 +134,7 @@ public class WarehouseCrudForm extends JFrame {
         String name = warehouseTable.getValueAt(selectedRow, 1).toString();
         String address = warehouseTable.getValueAt(selectedRow, 2).toString();
 
-        new WarehouseForm(clientConnection, "EDIT", this, warehouseId, name, address).show();
+        new WarehouseForm(clientConnection, "EDIT", this, warehouseId, name, address).setVisible(true);
     }
 
     private void deleteWarehouse() {

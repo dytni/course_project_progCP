@@ -37,24 +37,6 @@ public class ServerTest {
                 logger.log("Сервер остановлен.");
             }
         });
-
-        // Ожидаем запуска сервера
-        waitForServerToBeReady();
-    }
-
-    private static void waitForServerToBeReady() {
-        for (int i = 0; i < 10; i++) { // Пробуем подключиться до 10 раз
-            try (Socket socket = new Socket("localhost", 8080)) {
-                return; // Если удалось подключиться, значит сервер готов
-            } catch (IOException ignored) {
-                try {
-                    Thread.sleep(500); // Ждём 500 мс перед повторной попыткой
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-            }
-        }
-        throw new IllegalStateException("Сервер не готов после 5 секунд ожидания");
     }
 
     @Test

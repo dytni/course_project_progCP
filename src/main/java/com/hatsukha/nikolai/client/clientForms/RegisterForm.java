@@ -19,13 +19,11 @@ public class RegisterForm {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
 
-        // Создание панели с элементами
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Элементы интерфейса
         JLabel usernameLabel = StyleUtils.createStyledLabel("Имя пользователя:");
         JTextField usernameField = StyleUtils.createStyledTextField();
 

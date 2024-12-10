@@ -1,6 +1,7 @@
 package com.hatsukha.nikolai.client.operationForms;
 
 import com.hatsukha.nikolai.client.ClientConnection;
+import com.hatsukha.nikolai.client.utils.StyleUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,28 +20,25 @@ public class AddOperationForm extends JFrame {
         JPanel panel = new JPanel(new GridLayout(6, 2, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        JLabel productLabel = new JLabel("Выберите продукт:");
+        JLabel productLabel = StyleUtils.createStyledLabel("Выберите продукт:");
         JComboBox<String> productComboBox = new JComboBox<>();
 
-        JLabel warehouseLabel = new JLabel("Выберите склад:");
+        JLabel warehouseLabel = StyleUtils.createStyledLabel("Выберите склад:");
         JComboBox<String> warehouseComboBox = new JComboBox<>();
 
-        JLabel operationTypeLabel = new JLabel("Тип операции:");
+        JLabel operationTypeLabel = StyleUtils.createStyledLabel("Тип операции:");
         JComboBox<String> operationTypeComboBox = new JComboBox<>(new String[]{"приём", "перемещение", "списание"});
 
-        JLabel quantityLabel = new JLabel("Количество:");
+        JLabel quantityLabel = StyleUtils.createStyledLabel("Количество:");
         JTextField quantityField = new JTextField();
 
-        JButton addButton = new JButton("Добавить");
-        JButton cancelButton = new JButton("Отмена");
+        JButton addButton = StyleUtils.createStyledButton("Добавить");
+        JButton cancelButton = StyleUtils.createStyledButton("Отмена");
 
-        // Загрузка доступных продуктов
         loadProducts(productComboBox);
 
-        // Загрузка доступных складов
         loadWarehouses(warehouseComboBox);
 
-        // Обработчик кнопки "Добавить"
         addButton.addActionListener(e -> {
             try {
                 String selectedProduct = (String) productComboBox.getSelectedItem();
@@ -75,10 +73,8 @@ public class AddOperationForm extends JFrame {
             }
         });
 
-        // Обработчик кнопки "Отмена"
         cancelButton.addActionListener(e -> dispose());
 
-        // Добавление компонентов на панель
         panel.add(productLabel);
         panel.add(productComboBox);
         panel.add(warehouseLabel);
@@ -100,7 +96,7 @@ public class AddOperationForm extends JFrame {
             int productCount = Integer.parseInt(clientConnection.receive());
             for (int i = 0; i < productCount; i++) {
                 String[] productData = clientConnection.receive().split(",");
-                String productItem = "ID: " + productData[0] + " - " + productData[1]; // Формат: ID - Название
+                String productItem = "ID: " + productData[0] + " - " + productData[1];
                 productComboBox.addItem(productItem);
             }
         } catch (NumberFormatException e) {
@@ -114,7 +110,7 @@ public class AddOperationForm extends JFrame {
             int warehouseCount = Integer.parseInt(clientConnection.receive());
             for (int i = 0; i < warehouseCount; i++) {
                 String[] warehouseData = clientConnection.receive().split(",");
-                String warehouseItem = "ID: " + warehouseData[0] + " - " + warehouseData[1]; // Формат: ID - Локация
+                String warehouseItem = "ID: " + warehouseData[0] + " - " + warehouseData[1];
                 warehouseComboBox.addItem(warehouseItem);
             }
         } catch (NumberFormatException e) {

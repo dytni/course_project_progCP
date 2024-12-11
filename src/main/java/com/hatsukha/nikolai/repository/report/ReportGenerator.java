@@ -1,4 +1,4 @@
-package com.hatsukha.nikolai.report;
+package com.hatsukha.nikolai.repository.report;
 
 import java.io.FileWriter;
 import java.sql.Connection;

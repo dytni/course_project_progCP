@@ -1,6 +1,6 @@
 package com.hatsukha.nikolai.server;
 
-import com.hatsukha.nikolai.report.ReportGenerator;
+import com.hatsukha.nikolai.repository.report.ReportGenerator;
 import com.hatsukha.nikolai.repository.DatabaseConnection;
 import com.hatsukha.nikolai.repository.DatabaseManager;
 import com.hatsukha.nikolai.service.*;

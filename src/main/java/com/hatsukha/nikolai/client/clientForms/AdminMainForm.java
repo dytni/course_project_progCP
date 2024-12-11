@@ -33,6 +33,7 @@ public class AdminMainForm extends BaseMainForm {
         JButton viewStatsButton = StyleUtils.createStyledButton("Просмотреть статистику операций");
         JButton warehouseButton = StyleUtils.createStyledButton("Статистика по складам");
         JButton viewLogsButton = StyleUtils.createStyledButton("Просмотр логов");
+        JButton reportButton = StyleUtils.createStyledButton("Отчет");
 
 
         gbc.gridy = 2;
@@ -54,6 +55,18 @@ public class AdminMainForm extends BaseMainForm {
 
         gbc.gridy = 8;
         panel.add(viewLogsButton, gbc);
+        gbc.gridy = 9;
+        panel.add(reportButton, gbc);
+
+        reportButton.addActionListener(e -> {
+            clientConnection.send("REPORT");
+            String response = clientConnection.receive();
+            if ("SUCCESS".equals(response)) {
+                JOptionPane.showMessageDialog(frame, "Отчет создан!", "Успех", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(frame, "Ошибка отчета!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            }
+        });
 
         viewLogsButton.addActionListener(e -> {
             frame.dispose();
@@ -66,13 +79,11 @@ public class AdminMainForm extends BaseMainForm {
         });
 
 
-        // Обработчик для кнопки управления продуктами
         viewProductsButton.addActionListener(e -> {
             frame.dispose();
             new ProductCrudForm(clientConnection, role, userId).setVisible(true);
         });
 
-        // Обработчик для кнопки управления складами
         viewWarehousesButton.addActionListener(e -> {
             frame.dispose();
             new WarehouseCrudForm(clientConnection).setVisible(true);

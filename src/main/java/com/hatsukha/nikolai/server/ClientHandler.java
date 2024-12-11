@@ -1,5 +1,7 @@
 package com.hatsukha.nikolai.server;
 
+import com.hatsukha.nikolai.report.ReportGenerator;
+import com.hatsukha.nikolai.repository.DatabaseConnection;
 import com.hatsukha.nikolai.repository.DatabaseManager;
 import com.hatsukha.nikolai.service.*;
 
@@ -28,6 +30,7 @@ public class ClientHandler implements Runnable {
             ProductService productService = new ProductService(logger, dbManager);
             WarehouseService warehouseService = new WarehouseService(logger, dbManager);
             ProductOperationService productOperationService = new ProductOperationService(logger, dbManager);
+            ReportGenerator reportGenerator = new ReportGenerator(DatabaseConnection.getInstance().getConnection());
 
             String command;
             while ((command = in.readLine()) != null) {
@@ -154,6 +157,11 @@ public class ClientHandler implements Runnable {
                         logger.log("Ответ на тест сервера");
                         out.println("PONG");
                         break;
+                    case "REPORT":
+                        logger.log("Генерация отчета");
+                        out.println(reportGenerator.generateReport() ? "SUCCESS" : "FAILURE");
+                        break;
+
                     default:
                         logger.log("Неизвестная команда от клиента: " + command);
                         out.println("UNKNOWN_COMMAND");

@@ -16,7 +16,7 @@ public abstract class BaseMainForm {
     }
 
     public void showBase(JFrame frame) {
-        frame.setSize(800, 600);
+        frame.setSize(800, 650);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
 

@@ -3,7 +3,7 @@ package com.hatsukha.nikolai.client.clientForms;
 import com.hatsukha.nikolai.client.ClientConnection;
 import com.hatsukha.nikolai.client.operationForms.GetOperationsByUserForm;
 import com.hatsukha.nikolai.client.operationForms.WarehouseOrdersChartForm;
-import com.hatsukha.nikolai.client.productForms.old.ViewProductsForm;
+import com.hatsukha.nikolai.client.productForms.user.ViewProductsForm;
 import com.hatsukha.nikolai.client.utils.StyleUtils;
 
 import javax.swing.*;

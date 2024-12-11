@@ -1,4 +1,4 @@
-package com.hatsukha.nikolai.client.productForms.old;
+package com.hatsukha.nikolai.client.productForms.user;
 
 import com.hatsukha.nikolai.client.ClientConnection;
 import com.hatsukha.nikolai.client.clientForms.AdminMainForm;

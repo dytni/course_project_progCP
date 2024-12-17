@@ -7,14 +7,14 @@ CREATE TABLE Products (
     description TEXT,
     category VARCHAR(255),
     weight DECIMAL(10, 2),
-    volume DECIMAL(10, 2)
-    location VARCHAR(255),
+    volume DECIMAL(10, 2),
+    location VARCHAR(255)
 );
 
 CREATE TABLE Warehouse (
     warehouse_id INT AUTO_INCREMENT PRIMARY KEY,
     location VARCHAR(255) NOT NULL,
-    capacity INT NOT NULL
+    name VARCHAR(255) NOT NULL
 );
 
 
@@ -34,4 +34,9 @@ CREATE TABLE Users (
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     role ENUM('ADMIN', 'USER') NOT NULL
+);
+
+CREATE TABLE LogMessages(
+    log_id int AUTO_INCREMENT PRIMARY KEY,
+    message VARCHAR(255) NOT NULL
 );

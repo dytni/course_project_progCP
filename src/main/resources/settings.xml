@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
+<!---->
 <styles>
     <color name="HEADER_BG_COLOR">#87CEFA</color>
     <color name="HEADER_TEXT_COLOR">#000000</color>
@@ -13,7 +13,7 @@
     <color name="TEXT_FIELD_TEXT_COLOR">#000000</color>
     <color name="CURSOR_COLOR">#000000</color>
 </styles>
-        -->
+
 
 <!--Тёмная тема
 <styles>
@@ -30,7 +30,7 @@
     <color name="CURSOR_COLOR">#FFFFFF</color>
 </styles>
 -->
-<!--Светлая пастель -->
+<!--Светлая пастель
 <styles>
     <color name="HEADER_BG_COLOR">#FFDAB9</color>
     <color name="HEADER_TEXT_COLOR">#000000</color>
@@ -44,7 +44,7 @@
     <color name="TEXT_FIELD_TEXT_COLOR">#000000</color>
     <color name="CURSOR_COLOR">#000000</color>
 </styles>
-
+        -->
 <!--Яркий минимализм
 <styles>
     <color name="HEADER_BG_COLOR">#FF4500</color>

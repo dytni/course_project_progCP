@@ -2,6 +2,7 @@ package com.hatsukha.nikolai.client.operationForms;
 
 import com.hatsukha.nikolai.client.ClientConnection;
 import com.hatsukha.nikolai.client.clientForms.UserMainForm;
+import com.hatsukha.nikolai.client.utils.StyleUtils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -25,22 +26,22 @@ public class GetOperationsByUserForm extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
-        operationsTable = createStyledTable();
+        operationsTable = StyleUtils.createStyledTable();
         JScrollPane scrollPane = new JScrollPane(operationsTable);
         scrollPane.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(new Color(173, 216, 230), 2),
+                StyleUtils.createStyledLineBorder(),
                 "Операции пользователя",
                 0,
                 0,
                 new Font("Arial", Font.BOLD, 16),
-                new Color(173, 216, 230)
+                StyleUtils.TITLE_COLOR
         ));
 
-        JButton orderButton = createStyledButton("Провести операцию");
-        JButton updateButton = createStyledButton("Обновить операцию");
-        JButton backButton = createStyledButton("Назад");
+        JButton orderButton = StyleUtils.createStyledButton("Провести операцию");
+        JButton updateButton = StyleUtils.createStyledButton("Обновить операцию");
+        JButton backButton = StyleUtils.createStyledButton("Назад");
 
-        JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 10, 10));
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 3, 10, 10));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         buttonPanel.add(orderButton);
         buttonPanel.add(updateButton);
@@ -67,55 +68,13 @@ public class GetOperationsByUserForm extends JFrame {
             new UpdateOperationForm(clientConnection, operationId, userId, this, productId, warehouseId, quantity);
         });
 
-
         mainPanel.add(scrollPane, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         add(mainPanel);
         setVisible(true);
 
-        // Автоматическое обновление таблицы
         loadOperationsByUser();
-
-    }
-
-    private JTable createStyledTable() {
-        JTable table = new JTable();
-        table.setFont(new Font("Arial", Font.PLAIN, 16));
-        table.setRowHeight(30);
-        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
-        table.getTableHeader().setBackground(new Color(173, 216, 230));
-        table.getTableHeader().setForeground(Color.BLACK);
-        table.setSelectionBackground(new Color(135, 206, 235));
-        table.setSelectionForeground(Color.BLACK);
-        table.setGridColor(new Color(173, 216, 230));
-        table.setBackground(Color.WHITE);
-        table.setForeground(Color.BLACK);
-        table.setShowGrid(true);
-        table.setAutoCreateRowSorter(true);
-        return table;
-    }
-
-    private JButton createStyledButton(String text) {
-        JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.BOLD, 16));
-        button.setForeground(Color.BLACK);
-        button.setBackground(new Color(173, 216, 230));
-        button.setFocusPainted(false);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-
-        button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(135, 206, 235));
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(new Color(173, 216, 230));
-            }
-        });
-
-        return button;
     }
 
     public void loadOperationsByUser() {
@@ -151,22 +110,21 @@ public class GetOperationsByUserForm extends JFrame {
         JPanel panel = new JPanel(new GridLayout(6, 2, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        JLabel productLabel = new JLabel("Выберите продукт:");
+        JLabel productLabel = StyleUtils.createStyledLabel("Выберите продукт:");
         JComboBox<String> productComboBox = new JComboBox<>();
 
-        JLabel warehouseLabel = new JLabel("Выберите склад:");
+        JLabel warehouseLabel = StyleUtils.createStyledLabel("Выберите склад:");
         JComboBox<String> warehouseComboBox = new JComboBox<>();
 
-        JLabel operationTypeLabel = new JLabel("Тип операции:");
+        JLabel operationTypeLabel = StyleUtils.createStyledLabel("Тип операции:");
         JComboBox<String> operationTypeComboBox = new JComboBox<>(new String[]{"приём", "перемещение", "списание"});
 
-        JLabel quantityLabel = new JLabel("Количество:");
-        JTextField quantityField = new JTextField();
+        JLabel quantityLabel = StyleUtils.createStyledLabel("Количество:");
+        JTextField quantityField = StyleUtils.createStyledTextField();
 
-        JButton orderButton = createStyledButton("Оформить");
-        JButton cancelButton = createStyledButton("Отмена");
+        JButton orderButton = StyleUtils.createStyledButton("Оформить");
+        JButton cancelButton = StyleUtils.createStyledButton("Отмена");
 
-        // Загрузка доступных продуктов
         clientConnection.send("VIEW_PRODUCTS");
         try {
             int productCount = Integer.parseInt(clientConnection.receive());
@@ -180,7 +138,6 @@ public class GetOperationsByUserForm extends JFrame {
             return;
         }
 
-        // Загрузка доступных складов
         clientConnection.send("VIEW_WAREHOUSES");
         try {
             int warehouseCount = Integer.parseInt(clientConnection.receive());
@@ -245,5 +202,4 @@ public class GetOperationsByUserForm extends JFrame {
         frame.add(panel);
         frame.setVisible(true);
     }
-
 }

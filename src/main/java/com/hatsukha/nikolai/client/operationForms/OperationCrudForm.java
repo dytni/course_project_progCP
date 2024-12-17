@@ -26,15 +26,17 @@ public class OperationCrudForm extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
-        operationsTable =  StyleUtils.createStyledTable();
+
+        // Используем стилизованную таблицу
+        operationsTable = StyleUtils.createStyledTable();
         JScrollPane scrollPane = new JScrollPane(operationsTable);
         scrollPane.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(new Color(173, 216, 230), 2),
+                StyleUtils.createStyledLineBorder(),
                 "Список операций",
                 0,
                 0,
                 new Font("Arial", Font.BOLD, 16),
-                new Color(173, 216, 230)
+                StyleUtils.TITLE_COLOR
         ));
 
         JPanel buttonPanel = createButtonPanel();
@@ -48,21 +50,21 @@ public class OperationCrudForm extends JFrame {
         setVisible(true);
     }
 
-
     private JPanel createButtonPanel() {
         JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 10, 10));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        JButton addButton =  StyleUtils.createStyledButton("Добавить операцию");
-        JButton updateButton =  StyleUtils.createStyledButton("Редактировать операцию");
-        JButton deleteButton =  StyleUtils.createStyledButton("Удалить операцию");
-        JButton backButton =  StyleUtils.createStyledButton("Назад");
+        // Создаём стилизованные кнопки
+        JButton addButton = StyleUtils.createStyledButton("Добавить операцию");
+        JButton updateButton = StyleUtils.createStyledButton("Редактировать операцию");
+        JButton deleteButton = StyleUtils.createStyledButton("Удалить операцию");
+        JButton backButton = StyleUtils.createStyledButton("Назад");
 
         addButton.addActionListener(e -> openAddOperationForm());
         updateButton.addActionListener(e -> openUpdateOperationForm());
         deleteButton.addActionListener(e -> deleteSelectedOperation());
 
-        backButton.addActionListener(e ->{
+        backButton.addActionListener(e -> {
             dispose();
             new AdminMainForm(clientConnection, userId).show();
         });

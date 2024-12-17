@@ -104,6 +104,16 @@ public class ProductForm extends JFrame {
             try {
                 productWeight = Double.parseDouble(weightField.getText().trim());
                 productVolume = Double.parseDouble(volumeField.getText().trim());
+
+                // Проверка на отрицательные значения
+                if (productWeight < 0) {
+                    JOptionPane.showMessageDialog(this, "Вес не может быть отрицательным!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if (productVolume < 0) {
+                    JOptionPane.showMessageDialog(this, "Объём не может быть отрицательным!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Вес и объём должны быть числами!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -115,6 +125,7 @@ public class ProductForm extends JFrame {
                 editProduct(productId, productName, productDescription, productCategory, productWeight, productVolume, location);
             }
         });
+
         cancelButton.addActionListener(e -> dispose());
         add(panel);
         setVisible(true);
